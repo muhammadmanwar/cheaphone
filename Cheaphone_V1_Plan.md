@@ -49,7 +49,7 @@ The goal of this project is creating a low-cost, privacy-focused Linux "phone" u
   sudo raspi-config
   # Interface Options > Enable SPI and I2C
   ```
-- Update system (may take a WHILE, the wifi on the pi zero 2 w is not very powerful):
+- Update system (may take a WHILE, the wifi on the pi zero 2 w is not very fast):
 
   ```bash
   sudo apt update && sudo apt upgrade -y
@@ -57,7 +57,8 @@ The goal of this project is creating a low-cost, privacy-focused Linux "phone" u
 
 ### 3. Set Up Display
 
-- Use`LCD-show` (I used this repo <https://github.com/goodtft/LCD-show>), follow the steps in the repo for the screen that matches your screen. if your screen isn't listed, please add your setup instructions to this step
+- Use`LCD-show` (I used this repo <https://github.com/goodtft/LCD-show>), follow the steps in the repo for the screen that matches your screen. if your screen isn't listed, please add your setup instructions to this step.
+- Once the required drivers are installed, connect your screen and restart the device.
 
 ### 4. Install Audio Support
 
