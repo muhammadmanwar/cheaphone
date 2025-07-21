@@ -13,7 +13,7 @@ The goal of this project is creating a low-cost, privacy-focused Linux "phone" u
 | Component              | Description (prices listed where relatively accurate prices could be determined)                                                                                                                   |
 |------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Raspberry Pi Zero 2 W  | SBC, computer that runs the whole thing. This could be replaced with a similar part from banana pi or orange pi. But the GPIO may be different. I bought the pi zero 2 w from microcenter, $15-$18 |
-| Touch-screen           |  I used a part from microcenter, Inland 3.5" GPIO Touchscreen HAT, \~$25                                                                                                                            |
+| Touch-screen           | I used a part from microcenter, Inland 3.5" GPIO Touchscreen HAT, \~$25                                                                                                                            |
 | USB Battery Pack       | 5V output, 5000 mAh+, (I don't remember where I got mine, I just had it sitting around. A very basic power bank would do fine). Cost will depend on what is available near you                     |
 
 ### Additional Components
@@ -60,12 +60,18 @@ The goal of this project is creating a low-cost, privacy-focused Linux "phone" u
 - Use`LCD-show` (I used this repo <https://github.com/goodtft/LCD-show>), follow the steps in the repo for the screen that matches your screen. if your screen isn't listed, please add your setup instructions to this step.
 - Once the required drivers are installed, connect your screen and restart the device.
 
+### 3.5. Set Up Matchbox Keyboard
+
+- You'll likely also need an onscreen keyboard. These instructions go over how to set up matchbox keyboard: https://thepihut.com/blogs/raspberry-pi-tutorials/matchbox-keyboard-raspberry-pi-touchscreen-keyboard
+- Can be installed with "apt install matchbox-keyboard"
+- I found config in /usr/share/matchbox-keyboard, but depending on your OS and the user you install as, the config may end up somewhere else. please add that info here.
+- I changed my default config to "keyboard-lq1.xml", and backed up my old one, using this command as root, from the config directory: "cp keyboard.xml keyboard-backup.xml; cp keyboard-lq1.xml keyboard.xml"
+
 ### 4. Install Audio Support
 
-- Plug in USB audio dongle
+- Plug in USB audio dongle into the hub, as well as any adaptors required. the pi zero only has micro usb ports, and I haven't found a micro usb hub. Other SBCs may have ports that don't require adaptors, but I needed a micro USB to USB A, and a USB A to USB C, then used a USB C hub with USB ports, and plugged the usb audio card into that.
 - You may need to install additional drivers depending on the linux distro used (untested, mine worked out of the box)
   - Install PulseAudio or ALSA:
-
     ```bash
     sudo apt install pulseaudio pavucontrol
     ```
