@@ -99,7 +99,8 @@ The below instructions are unconfirmed
 ---
 
 ### Long term: Create Basic Phone UI
-
+Use PostMarketOs? <https://postmarketos.org/>
+or
 - Build custom interface (using python?) to display: 
   - Signal strength
   - Call/SMS buttons
