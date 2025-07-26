@@ -79,6 +79,9 @@ The goal of this project is creating a low-cost, privacy-focused Linux "phone" u
 
 ### 5. Install Modem Support (untested)
 
+Some reference documentation here: <https://andino.systems/andino-4g-modem/ppp>
+
+The below instructions are unconfirmed
 - Install ModemManager:
 
   ```bash
