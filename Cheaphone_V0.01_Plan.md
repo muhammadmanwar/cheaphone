@@ -12,23 +12,21 @@ The goal of this project is creating a low-cost, privacy-focused Linux "phone" u
 
 | Component              | Description (prices listed where relatively accurate prices could be determined)                                                                                                                   |
 |------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Raspberry Pi Zero 2 W  | SBC, computer that runs the whole thing. This could be replaced with a similar part from banana pi or orange pi. But the GPIO may be different. I bought the pi zero 2 w from microcenter, $15-$18 |
-| Touch-screen           | I used a part from microcenter, Inland 3.5" GPIO Touchscreen HAT, \~$25                                                                                                                            |
-| USB Battery Pack       | 5V output, 5000 mAh+, (I don't remember where I got mine, I just had it sitting around. A very basic power bank would do fine). Cost will depend on what is available near you                     |
+| Raspberry Pi 5         | SBC, computer that runs the whole thing. This could be replaced with a similar part from banana pi or orange pi. But the GPIO may be different. I bought the 8gb pi 5 from microcenter, $70 |
+| Touch-screen           | I used a part from pishop, https://www.pishop.us/product/5inch-capacitive-touch-display-for-raspberry-pi-dsi-interface-800-480/?searchid=0&search_query=+5+inch+dsi, \~$45                                                                                                                            |
+| USB Battery Pack       | 5V/5A output, 10000 mAh+, Cost will depend on what is available near you. I got an INIU one from best buy for around 30 dollars                     |
 
 ### Additional Components
 
 | Component                   | Description                                                                                                                                                                       |
 |-----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Micro-USB to USB-A OTG      | Adapter for connecting USB peripherals, not needed for basic functionality, I bought this from microcenter                                                                        |
-| USB Hub                     | For modem and audio dongle, not needed for basic functionality, I bought this from microcenter. Cost will depend on what is available near you                                    |
 | USB LTE Modem (SIM support) | suggested devices to test: Quectel EC25 / Huawei E3372 / SIM7600 (untested)                                                                                                       |
 | USB Audio Dongle            | 3.5mm mic/speaker interface, not needed for basic functionality, I bought this from microcenter (you're probably sensing a trend). Cost will depend on what is available near you |
 | External Speaker            | earphones or speaker that connect through 3.5mm jack                                                                                                                              |
 | Microphone                  | 3.5mm mic                                                                                                                                                                         |
 | Case / Enclosure            | 3D printed (or other DIY)                                                                                                                                                         |
 
-> Estimated Total Cost: ~$40–$120 depending on modem and audio config
+> Estimated Total Cost: ~$115+ depending on modem and audio config
 
 ---
 
@@ -38,11 +36,11 @@ The goal of this project is creating a low-cost, privacy-focused Linux "phone" u
 
 - Download Raspberry Pi OS Lite or similar lightweight Linux distro (I used Raspberry Pi OS Lite with Desktop and security updates)
 - Flash OS to microSD card using pi imager (or other flasher)
-- Insert into Pi Zero 2 W (or other SBC)
+- Insert into Pi 5 (or other SBC)
 
 ### 2. Boot and Configure Pi
 
-- Connect Pi to mini HDMI to HDMI + USB keyboard (initial setup only) or ssh in if you enabled that already through the pi imager
+- Connect Pi to mini/micro HDMI to HDMI + USB keyboard (initial setup only) or ssh in if you enabled that already through the pi imager
 - Enable I2C in interfaces (may also need to enable SPI depending on the display/configuration, this may require different terminal commands to set up depending on the OS):
 
   ```bash
@@ -57,8 +55,8 @@ The goal of this project is creating a low-cost, privacy-focused Linux "phone" u
 
 ### 3. Set Up Display
 
-- Use`LCD-show` (I used this repo <https://github.com/goodtft/LCD-show>), follow the steps in the repo for the screen that matches your screen. if your screen isn't listed, please add your setup instructions to this step.
-- Once the required drivers are installed, connect your screen and restart the device.
+- I used this link to set up my confi for the display: https://www.waveshare.com/wiki/5inch_DSI_LCD
+- I used the "vc4-kms-v3d-pi5" overlay, which worked for both display and touch functionality
 
 ### 3.5. Set Up Matchbox Keyboard
 
