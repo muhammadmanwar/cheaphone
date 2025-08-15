@@ -99,6 +99,8 @@ The below instructions are unconfirmed
 ### Long term: Create Basic Phone UI
 Use PostMarketOs? <https://postmarketos.org/>
 or
+Use phosh UI with basic debian install? (having difficulties getting wayland to work on the pi 5)
+or
 - Build custom interface (using python?) to display: 
   - Signal strength
   - Call/SMS buttons
