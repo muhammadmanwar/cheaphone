@@ -16,7 +16,7 @@ The goal of this project is creating a low-cost, privacy-focused Linux "phone" u
 | Touch-screen           | I used a part from pishop, https://www.pishop.us/product/5inch-capacitive-touch-display-for-raspberry-pi-dsi-interface-800-480/?searchid=0&search_query=+5+inch+dsi, \~$45                                                                                                                            |
 | USB Battery Pack       | 5V/5A output, 10000 mAh+, Cost will depend on what is available near you. I got an INIU one from best buy for around 30 dollars                     |
 | OR                     |                                                      |
-| Custom Battery        | 5V/5A output, some type of charge controller will need to be included to handle charging the cells evenly Cost will depend on what is available near you. I'm still figuring this part out                     |
+| Custom Battery        | 5V/5A output, some type of charge controller will need to be included to handle charging the cells evenly. Cost will depend on what is available near you. I'm still figuring this part out                     |
 
 ### Additional Components
 
@@ -78,6 +78,7 @@ The goal of this project is creating a low-cost, privacy-focused Linux "phone" u
   - Test input/output using `arecord` / `aplay` or `pavucontrol`
 
 ### 5. Install Modem Support (untested)
+I have not been able to test this yet, so any help here will be appreciated. The info below is untested and likely entirely incorrect
 
 Some reference documentation here: <https://andino.systems/andino-4g-modem/ppp>
 
