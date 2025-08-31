@@ -1,4 +1,4 @@
-# Cheap Privacy-Respecting Linux "Phone" - v0.01 Build Plan
+# Cheap Privacy-Respecting Linux "Phone" - v0.02 Build Plan
 
 ## Overview
 
@@ -15,13 +15,15 @@ The goal of this project is creating a low-cost, privacy-focused Linux "phone" u
 | Raspberry Pi 5         | SBC, computer that runs the whole thing. This could be replaced with a similar part from banana pi or orange pi. But the GPIO may be different. I bought the 8gb pi 5 from microcenter, $70 |
 | Touch-screen           | I used a part from pishop, https://www.pishop.us/product/5inch-capacitive-touch-display-for-raspberry-pi-dsi-interface-800-480/?searchid=0&search_query=+5+inch+dsi, \~$45                                                                                                                            |
 | USB Battery Pack       | 5V/5A output, 10000 mAh+, Cost will depend on what is available near you. I got an INIU one from best buy for around 30 dollars                     |
+| OR                     |                                                      |
+| Custom Battery        | 5V/5A output, some type of charge controller will need to be included to handle charging the cells evenly Cost will depend on what is available near you. I'm still figuring this part out                     |
 
 ### Additional Components
 
 | Component                   | Description                                                                                                                                                                       |
 |-----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| USB LTE Modem (SIM support) | suggested devices to test: Quectel EC25 / Huawei E3372 / SIM7600 (untested)                                                                                                       |
-| USB Audio Dongle            | 3.5mm mic/speaker interface, not needed for basic functionality, I bought this from microcenter (you're probably sensing a trend). Cost will depend on what is available near you |
+| USB LTE Modem (SIM support) | I've purchased Gravity: CAT1 A7670G Global 4G IoT Communication Module, but it has not arrived yet, so this is untested                                                           |
+| USB Audio Dongle            | 3.5mm mic/speaker interface, I bought this from microcenter (you're probably sensing a trend). Cost will depend on what is available near you |
 | External Speaker            | earphones or speaker that connect through 3.5mm jack                                                                                                                              |
 | Microphone                  | 3.5mm mic                                                                                                                                                                         |
 | Case / Enclosure            | 3D printed (or other DIY)                                                                                                                                                         |
@@ -47,7 +49,7 @@ The goal of this project is creating a low-cost, privacy-focused Linux "phone" u
   sudo raspi-config
   # Interface Options > Enable SPI and I2C
   ```
-- Update system (may take a WHILE, the wifi on the pi zero 2 w is not very fast):
+- Update system:
 
   ```bash
   sudo apt update && sudo apt upgrade -y
@@ -55,7 +57,7 @@ The goal of this project is creating a low-cost, privacy-focused Linux "phone" u
 
 ### 3. Set Up Display
 
-- I used this link to set up my confi for the display: https://www.waveshare.com/wiki/5inch_DSI_LCD
+- I used this link to set up my config for the display: https://www.waveshare.com/wiki/5inch_DSI_LCD
 - I used the "vc4-kms-v3d-pi5" overlay, which worked for both display and touch functionality
 
 ### 3.5. Set Up Matchbox Keyboard
@@ -67,7 +69,7 @@ The goal of this project is creating a low-cost, privacy-focused Linux "phone" u
 
 ### 4. Install Audio Support
 
-- Plug in USB audio dongle into the hub, as well as any adaptors required. the pi zero only has micro usb ports, and I haven't found a micro usb hub. Other SBCs may have ports that don't require adaptors, but I needed a micro USB to USB A, and a USB A to USB C, then used a USB C hub with USB ports, and plugged the usb audio card into that.
+- Plug in USB audio dongle into the hub, as well as any adaptors required. Other SBCs may have audio ports built in
 - You may need to install additional drivers depending on the linux distro used (untested, mine worked out of the box)
   - Install PulseAudio or ALSA:
     ```bash
@@ -79,7 +81,7 @@ The goal of this project is creating a low-cost, privacy-focused Linux "phone" u
 
 Some reference documentation here: <https://andino.systems/andino-4g-modem/ppp>
 
-The below instructions are unconfirmed
+The below alternate instructions are unconfirmed
 - Install ModemManager:
 
   ```bash
@@ -96,14 +98,13 @@ The below instructions are unconfirmed
 
 ---
 
-### Long term: Create Basic Phone UI
-Use PostMarketOs? <https://postmarketos.org/>
-or
-Use phosh UI with basic debian install? (having difficulties getting wayland to work on the pi 5)
-or
-- Build custom interface (using python?) to display: 
-  - Signal strength
-  - Call/SMS buttons
-  - Settings/Advanced Mode (fancy name for desktop mode)
-- Determine additional default security measures to limit external tracking (Session messaging integration, linux hardening)
-- Do we need to integrate this into an OS? Or some sort of apt package? maybe we could just start at an install script. 
+### UI/UX
+Use phosh UI with basic debian install? (having difficulties getting wayland to work on the pi 5, maybe a different SBC would work better
+Determine additional default security measures to limit external tracking (Session messaging integration, linux hardening)
+
+### Difficulties/Concerns
+The Raspberry Pi 5 may not support proper suspend/sleep functionality, so this may be something that we need to work around (maybe some sort of button that connects to GPIO and toggles a signal that blanks the screen and throttles CPU speeds? not sure)
+  - this may be something that needs to be solved by using a different SBC. Will need further testing to confirm
+
+### Random Thoughts
+Maybe the project should pivot to use a RISC-V cpu, in an effort to further empasize the open source vision?
