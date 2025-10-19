@@ -3,7 +3,7 @@
 ## Overview
 
 The goal of this project is creating a low-cost, privacy-focused Linux "phone" using modular components and minimal setup. The project's future intent is to function out-of-the-box for basic phone use (calls and SMS) while also offering the full power of a Linux computer for advanced users. The aim is to maintain ethical sourcing where possible and prioritize accessibility and modularity.
-
+See the case-models folder for FreeCAD files, to build one yourself.
 ---
 
 ## Bill of Materials 
@@ -15,7 +15,7 @@ Estimated Total Cost: ~$140+ depending on modem and audio config
 |------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Raspberry Pi 5         | SBC, computer that runs the whole thing. This could be replaced with a similar part from banana pi or orange pi. But the GPIO may be different. I bought the 8gb pi 5 from microcenter, $70 |
 | Touch-screen           | I used a part from pishop, https://www.pishop.us/product/5inch-capacitive-touch-display-for-raspberry-pi-dsi-interface-800-480/?searchid=0&search_query=+5+inch+dsi, \~$45                                                                                                                            |
-| USB Battery Pack       | I used a protected 21700 from vapcell, purchased here: https://liionwholesale.com/collections/batteries/products/protected-vapcell-p2160b-21700-10a-button-top-6000mah-usb-battery-genuine, $12 |
+| USB Battery Pack       | I used a protected 21700 with a built in usb c port from vapcell, purchased here: https://liionwholesale.com/collections/batteries/products/protected-vapcell-p2160b-21700-10a-button-top-6000mah-usb-battery-genuine, $12 |
 
 ### Additional Components
 
@@ -66,7 +66,7 @@ Estimated Total Cost: ~$140+ depending on modem and audio config
 
 ### 4. Audio Support
 
-- Plug in USB audio dongle into the hub, as well as any adaptors required. Other SBCs may have audio ports built in
+- Plug in USB audio dongle into the SBC. The pi 5 has no built in audio ports. Other SBCs may have audio ports built in
 
 ### 5. Modem Support (untested)
 I have not been able to test this yet, so any help here will be appreciated. The info below is untested and likely entirely incorrect
@@ -98,4 +98,4 @@ The Raspberry Pi 5 may not support proper suspend/sleep functionality, so this m
   - this may be something that needs to be solved by using a different SBC. Will need further testing to confirm
 
 ### Future Plans
-Maybe the project should pivot to use a RISC-V cpu, in an effort to further empasize the open source vision?
+Maybe the project should pivot to use a RISC-V SBC, in an effort to further empasize the open source vision?
