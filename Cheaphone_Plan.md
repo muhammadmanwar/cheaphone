@@ -1,4 +1,4 @@
-# Cheap Privacy-Respecting Linux "Phone" - v0.02 Build Plan
+# Cheap Privacy-Respecting Linux "Phone" - v0.03 Build Plan
 
 ## Overview
 
@@ -6,7 +6,8 @@ The goal of this project is creating a low-cost, privacy-focused Linux "phone" u
 
 ---
 
-## Bill of Materials
+## Bill of Materials 
+Estimated Total Cost: ~$140+ depending on modem and audio config
 
 ### Core Components
 
@@ -14,9 +15,7 @@ The goal of this project is creating a low-cost, privacy-focused Linux "phone" u
 |------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Raspberry Pi 5         | SBC, computer that runs the whole thing. This could be replaced with a similar part from banana pi or orange pi. But the GPIO may be different. I bought the 8gb pi 5 from microcenter, $70 |
 | Touch-screen           | I used a part from pishop, https://www.pishop.us/product/5inch-capacitive-touch-display-for-raspberry-pi-dsi-interface-800-480/?searchid=0&search_query=+5+inch+dsi, \~$45                                                                                                                            |
-| USB Battery Pack       | 5V/5A output, 10000 mAh+, Cost will depend on what is available near you. I got an INIU one from best buy for around 30 dollars                     |
-| OR                     |                                                      |
-| Custom Battery        | 5V/5A output, some type of charge controller will need to be included to handle charging the cells evenly. Cost will depend on what is available near you. I'm still figuring this part out                     |
+| USB Battery Pack       | I used a protected 21700 from vapcell, purchased here: https://liionwholesale.com/collections/batteries/products/protected-vapcell-p2160b-21700-10a-button-top-6000mah-usb-battery-genuine, $12 |
 
 ### Additional Components
 
@@ -27,8 +26,6 @@ The goal of this project is creating a low-cost, privacy-focused Linux "phone" u
 | External Speaker            | earphones or speaker that connect through 3.5mm jack                                                                                                                              |
 | Microphone                  | 3.5mm mic                                                                                                                                                                         |
 | Case / Enclosure            | 3D printed (or other DIY)                                                                                                                                                         |
-
-> Estimated Total Cost: ~$115+ depending on modem and audio config
 
 ---
 
@@ -67,17 +64,11 @@ The goal of this project is creating a low-cost, privacy-focused Linux "phone" u
 - I found config in /usr/share/matchbox-keyboard, but depending on your OS and the user you install as, the config may end up somewhere else. please add that info here.
 - I changed my default config to "keyboard-lq1.xml", and backed up my old one, using this command as root, from the config directory: "cp keyboard.xml keyboard-backup.xml; cp keyboard-lq1.xml keyboard.xml"
 
-### 4. Install Audio Support
+### 4. Audio Support
 
 - Plug in USB audio dongle into the hub, as well as any adaptors required. Other SBCs may have audio ports built in
-- You may need to install additional drivers depending on the linux distro used (untested, mine worked out of the box)
-  - Install PulseAudio or ALSA:
-    ```bash
-    sudo apt install pulseaudio pavucontrol
-    ```
-  - Test input/output using `arecord` / `aplay` or `pavucontrol`
 
-### 5. Install Modem Support (untested)
+### 5. Modem Support (untested)
 I have not been able to test this yet, so any help here will be appreciated. The info below is untested and likely entirely incorrect
 
 Some reference documentation here: <https://andino.systems/andino-4g-modem/ppp>
@@ -100,12 +91,11 @@ The below alternate instructions are unconfirmed
 ---
 
 ### UI/UX
-Use phosh UI with basic debian install? (having difficulties getting wayland to work on the pi 5, maybe a different SBC would work better
-Determine additional default security measures to limit external tracking (Session messaging integration, linux hardening)
+- I switched to KDE Plasma as a frontend, but other frontends may work better. Phosh may be ideal for a phone-like device format, but I am having difficulties getting wayland UI's to run properly on the pi 5.  
 
-### Difficulties/Concerns
+### Battery Life Concerns
 The Raspberry Pi 5 may not support proper suspend/sleep functionality, so this may be something that we need to work around (maybe some sort of button that connects to GPIO and toggles a signal that blanks the screen and throttles CPU speeds? not sure)
   - this may be something that needs to be solved by using a different SBC. Will need further testing to confirm
 
-### Random Thoughts
+### Future Plans
 Maybe the project should pivot to use a RISC-V cpu, in an effort to further empasize the open source vision?
