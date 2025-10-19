@@ -3,8 +3,8 @@
 ## Overview
 
 The goal of this project is creating a low-cost, privacy-focused Linux "phone" using modular components and minimal setup. The project's future intent is to function out-of-the-box for basic phone use (calls and SMS) while also offering the full power of a Linux computer for advanced users. The aim is to maintain ethical sourcing where possible and prioritize accessibility and modularity.
-See the case-models folder for FreeCAD files, to build one yourself.
 ---
+See the case-models folder for FreeCAD files, to build one yourself.
 
 ## Bill of Materials 
 Estimated Total Cost: ~$140+ depending on modem and audio config
