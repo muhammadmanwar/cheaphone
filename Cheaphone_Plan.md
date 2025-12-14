@@ -1,4 +1,4 @@
-# Cheap Privacy-Respecting Linux "Phone" - v0.03 Build Plan
+# Cheap Privacy-Respecting Linux "Phone" - v0.04 Build Plan
 
 ## Overview
 
@@ -21,7 +21,7 @@ Estimated Total Cost: ~$140+ depending on modem and audio config
 
 | Component                   | Description                                                                                                                                                                       |
 |-----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| USB LTE Modem (SIM support) | I've purchased Gravity: CAT1 A7670G Global 4G IoT Communication Module, but it has not arrived yet, so this is untested                                                           |
+| USB LTE Modem (SIM support) | I've purchased Gravity: CAT1 A7670G Global 4G IoT Communication Module, and it works, albeit with a slow connection speed. This may be a viable alternative for higher speeds https://www.dfrobot.com/product-2801.html                                                           |
 | USB Audio Dongle            | 3.5mm mic/speaker interface, I bought this from microcenter (you're probably sensing a trend). Cost will depend on what is available near you |
 | External Speaker            | earphones or speaker that connect through 3.5mm jack                                                                                                                              |
 | Microphone                  | 3.5mm mic                                                                                                                                                                         |
@@ -66,32 +66,42 @@ Estimated Total Cost: ~$140+ depending on modem and audio config
 
 ### 4. Audio Support
 
-- Plug in USB audio dongle into the SBC. The pi 5 has no built in audio ports. Other SBCs may have audio ports built in
+- Plug in USB audio dongle into the SBC. The pi 5 has no built in audio ports. Other SBCs may have audio ports built in. You can also use bluetooth audio devices.
 
-### 5. Modem Support (untested)
-I have not been able to test this yet, so any help here will be appreciated. The info below is untested and likely entirely incorrect
+### 5. Modem Support (Easy Way)
+- So far I've only been able to text and use mobile data, I have not been able to make a standard phone call successfully yet.
+- I discovered that the Phosh DE included some auto management of Network Modems. The easiest way to get the modem to work reliably** is to install the Phosh Desktop Environment by running `sudo apt install phosh-full`. Then reboot, and connect your modem by USB. You may need to set up the Access Point for your network provider. If you're still having issues, take a look at the next section.
 
-Some reference documentation here: <https://andino.systems/andino-4g-modem/ppp>
+**reliably when plugged into a 5 volts 5 amps power supply for the pi 5, when plugged into the battery the pi limits power to the usb plugs, which can result in the modem powering on and off and never actually connecting to mobile data. 
+#### 5.5. Modem Support (The Hard Way)
 
-The below alternate instructions are unconfirmed
-- Install ModemManager:
+- So far I've only been able to text and use mobile data, I have not been able to make a standard phone call successfully yet.
+- Plug the modem into the SBC. Open a terminal and type `systemctl status ModemManager` to check if modem manager is running. 
+- Run `nmtui` to add a mobile broadband connection. You may need to look up your mobile network provider's APN to complete this step. Connect to the newly configured network.
+- At this point, there is a chance that the network is functional. Test by opening a trusted web page. If its still not working, proceed with the next steps.
 
-  ```bash
-  sudo apt install modemmanager
-  sudo systemctl enable ModemManager
-  sudo systemctl start ModemManager
-  ```
-- Test modem detection:
+- If the modem is still not connected, you'll want to stop the ModemManager service with `systemctl stop ModemManager`. 
+- Then, you can run ModemManager in debug mode like `ModemManager --debug`. 
+- You'll need to watch the logs in this terminal, so open a new terminal.
 
-  ```bash
-  mmcli -L
-  mmcli -m 0
-  ```
+- In the new terminal, run `sudo mmcli --scan-devices`, which will start a scan. After a few moments, run `sudo mmcli --list-devices`. you should see your modem, identified by a number. Replace the number in the following commands with this number
+- Check signal quality using `sudo mmcli -m 0 --command=+csq?;`. Check operator status `sudo mmcli -m 0 --command=+cops?;`
+- Running a simple connect command may allow the modem to connect `sudo mmcli -m 0 --simple-connect='apn=<access point name>,ip-type=ipv4'`. You may need to look up your mobile network provider's APN to complete this step.
+- At this point, there is a chance that the network is functional. Test by opening a trusted web page. If its still not working, proceed with the next steps.
+
+- Run `sudo mmcli -m 0 --command=+creg?;` to get registration status. The output may be in the ModemManager debug terminal, rather than being output directly.
+- If the result of creg has a 2 as the first value (plus some other info), setting creg=1 may allow the network to connect. Run `sudo mmcli -m 0 --command=+creg=1;` 
+- At this point, there is a chance that the network is functional. Test by opening a trusted web page. If its still not working, proceed with the next steps.
+
+- If the modem is still not connected, try `sudo mmcli -m 0 --command=+creset;` to reboot the modem. Wait a few moments, then run `sudo nmcli --list-devices`. If nothing shows up, `sudo nmcli --scan-devices`, then wait a few moments, and list again.
+- The modem may be connected now, or it may require another connect command `sudo mmcli -m 0 --simple-connect='apn=<access point name>,ip-type=ipv4'`
+- At this point, there is a chance that the network is functional. If its not, you may need to experiment with the AT commands for the modem you are using. Here is a link to the wiki for the modem linked above, which contains a link to a pdf with the AT commands for the modem. https://wiki.dfrobot.com/SKU_TEL0163_A7670G_CAT1_4G_Communication_Module#More%20Document%20Downloads
+- Also the modem may not be properly powered through USB unless the pi is plugged into a 5 volts 5 amps power supply, when plugged into the battery the pi limits power to the usb plugs, which can result in the modem powering on and off and never actually connecting to mobile data. 
 
 ---
 
 ### UI/UX
-- I switched to KDE Plasma as a frontend, but other frontends may work better. Phosh may be ideal for a phone-like device format, but I am having difficulties getting wayland UI's to run properly on the pi 5.  
+- I switched to Phosh as a DE, I was able to install it in pi OS by running `sudo apt install phosh-full` in the terminal, then rebooting the device, and on the login screen, selecting phosh DE.
 
 ### Battery Life Concerns
 The Raspberry Pi 5 may not support proper suspend/sleep functionality, so this may be something that we need to work around (maybe some sort of button that connects to GPIO and toggles a signal that blanks the screen and throttles CPU speeds? not sure)
