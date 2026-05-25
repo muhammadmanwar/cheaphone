@@ -1,5 +1,9 @@
 # Cheap Privacy-Respecting Linux "Phone" - v0.04 Build Plan
 
+## This project views the https://github.com/SPIRIT-org/SPIRIT project as the spiritual successor to this project. Take a look at the SPIRIT project and give that repo a watch or star!
+
+This project will remain up and will be updated for hobbyist or personal use.
+
 ## Overview
 
 The goal of this project is creating a low-cost, privacy-focused Linux "phone" using modular components and minimal setup. The project's future intent is to function out-of-the-box for basic phone use (calls and SMS) while also offering the full power of a Linux computer for advanced users. The aim is to maintain ethical sourcing where possible and prioritize accessibility and modularity.
